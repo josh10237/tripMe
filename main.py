@@ -24,7 +24,7 @@ class ProjectNameGUI(App):
         return SCREEN_MANAGER
 
 
-Window.clearcolor = ((158/255), (247/255), (243/255), 1)  # White
+Window.clearcolor = (0, .6, .7, 1)
 
 
 class MainScreen(Screen):
