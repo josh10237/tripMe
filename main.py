@@ -24,7 +24,7 @@ class ProjectNameGUI(App):
         return SCREEN_MANAGER
 
 
-Window.clearcolor = (1, 1, 1, 1)  # White
+Window.clearcolor = ((158/255), (247/255), (243/255), 1)  # White
 
 
 class MainScreen(Screen):
@@ -40,18 +40,9 @@ class OneScreen(Screen):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 Builder.load_file('main.kv')
 SCREEN_MANAGER.add_widget(MainScreen(name='main'))
 SCREEN_MANAGER.add_widget(OneScreen(name='One'))
 
+if __name__ == "__main__":
+    ProjectNameGUI().run()
