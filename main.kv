@@ -2,22 +2,23 @@
     name: 'main'
     FloatLayout:
         size_hint: None, None
-
-
         Image:
-            source: "Logo1.png"
-            font_size: 20
-            size: 300, 300
-            x: root.width * .4
-            y:root.height * .7
+            source: "Logo4k.png"
+            x: (root.width * .5)-100
+            y: root.height * .7
+            size_hint_x: 2
+            allow_stretch: True
 
         Button:
             id: get_started
             text: "Get Started"
-            size: 400, 100
-            x: root.width * 0.45
-            y:root.height * 0.3
-            color: 0, 1, 0, 1
+            x: (root.width * .5)-150
+            y: root.height * 0.3
+            size: 300, 70
+            size_hint: None, None
+            color: 1, 1, 1, 1
+            bold: True
+            background_color: 3, 1, 1, 1
             on_press: root.getStarted()
 
 
