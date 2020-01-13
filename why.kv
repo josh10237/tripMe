@@ -1,0 +1,26 @@
+<why>:
+    name: 'why'
+    FloatLayout:
+        size_hint: None, None
+        Image:
+            source: "TRIPME.png"
+            x: (root.width * .5)-100
+            y: root.height * .8
+            size_hint_x: 2
+            allow_stretch: True
+
+        Label:
+            text: "Data Policy"
+            x: (root.width * .5)-50
+            y: root.height * 0.65
+            font_size: 36
+            bold: True
+
+        Label:
+            text: "It's my data now lollllllllllll. Nah Jk I won't sell your data. I just want to montior activity for analytics and diognostics. It also can help you save your info, but I haven't coded that yet"
+            x: (root.width * .5)-50
+            y: root.height * 0.4
+            halign: 'center'
+            text_size: root.width-100, None
+            size: self.texture_size
+            multi_line: True

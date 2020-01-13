@@ -36,6 +36,9 @@ class one(Screen):
             Builder.load_file('one.kv')
             super(one, self).__init__(**kwargs)
 
+    def whyDoWeAsk(self):
+        SCREEN_MANAGER.current = 'why'
+
 
 class why(Screen):
     def __init__(self, **kwargs):
@@ -43,11 +46,10 @@ class why(Screen):
             super(why, self).__init__(**kwargs)
 
 
-
 Builder.load_file('main.kv')
 SCREEN_MANAGER.add_widget(MainScreen(name='main'))
 SCREEN_MANAGER.add_widget(one(name='one'))
-SCREEN_MANAGER.add_widget(one(name='why'))
+SCREEN_MANAGER.add_widget(why(name='why'))
 
 if __name__ == "__main__":
     TripMe().run()
