@@ -20,7 +20,6 @@ age = ""
 gender = ""
 
 class TripMe(App):
-
     def build(self):
         SCREEN_MANAGER.current = 'main'
         return SCREEN_MANAGER
