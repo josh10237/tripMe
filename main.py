@@ -1,5 +1,6 @@
 import os
 import kivy
+import requests
 import utils
 import kivy.utils
 from kivy.app import App
@@ -75,7 +76,6 @@ class one(Screen):
         #     return "Please type Male or Female"
         # else:
         #     return "Pass"
-
         return "Pass"
 
 
@@ -89,13 +89,36 @@ class two(Screen):
             Builder.load_file('two.kv')
             super(two, self).__init__(**kwargs)
 
+    def search(self):
+        SCREEN_MANAGER.current = 'search'
+
+
+class search(Screen):
+    def __init__(self, **kwargs):
+            Builder.load_file('search.kv')
+            super(search, self).__init__(**kwargs)
+
+    def apiCall(self):
+        url = "https://tripadvisor1.p.rapidapi.com/locations/search"
+
+        querystring = {"query": "pattaya", "lang": "en_US", "units": "mi"}
+
+        headers = {
+            'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
+            'x-rapidapi-key': "b8604d934emsh388e7aff14f4d7ep1eb9efjsn80019256d442"
+        }
+
+        response = requests.request("GET", url, headers=headers, params=querystring)
+
+        print(response.text)
+
 
 Builder.load_file('main.kv')
 SCREEN_MANAGER.add_widget(MainScreen(name='main'))
 SCREEN_MANAGER.add_widget(one(name='one'))
 SCREEN_MANAGER.add_widget(why(name='why'))
 SCREEN_MANAGER.add_widget(two(name='two'))
-SCREEN_MANAGER.add_widget(two(name='search'))
+SCREEN_MANAGER.add_widget(search(name='search'))
 
 if __name__ == "__main__":
     TripMe().run()
