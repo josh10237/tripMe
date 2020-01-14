@@ -18,6 +18,7 @@ email = ""
 name = ""
 age = ""
 gender = ""
+personalData = ["name", "email", "age", "gender"]
 
 class TripMe(App):
 
@@ -48,9 +49,34 @@ class one(Screen):
         email = self.ids.email.text
         age = self.ids.age.text
         gender = self.ids.gender.text
-        print(name+" "+email+" "+age+" "+gender)
-        SCREEN_MANAGER.current = 'two'
+        check = self.checkInfo(name, email, age, gender)
+        if check == "Pass":
+            personalData[0] = name
+            personalData[1] = email
+            personalData[2] = age
+            personalData[3] = gender
+            print(personalData)
+            SCREEN_MANAGER.current = 'two'
+        else:
+            self.ids.info_error.text = check
 
+
+
+    def checkInfo(self, name, email, age, gender):
+        # if (name.find(" ") == -1):
+        #     return "Name must have first and last seperated by space"
+        # if (email.find("@") == -1):
+        #     return "Please enter a valid email"
+        # if (age.isdigit() == False):
+        #     return "Please enter valid age"
+        # if (len(age) != 2):
+        #     return "Please enter a valid age"
+        # if (gender != "Male") and (gender != "Female"):
+        #     return "Please type Male or Female"
+        # else:
+        #     return "Pass"
+
+        return "Pass"
 
 
 class why(Screen):
@@ -69,6 +95,7 @@ SCREEN_MANAGER.add_widget(MainScreen(name='main'))
 SCREEN_MANAGER.add_widget(one(name='one'))
 SCREEN_MANAGER.add_widget(why(name='why'))
 SCREEN_MANAGER.add_widget(two(name='two'))
+SCREEN_MANAGER.add_widget(two(name='search'))
 
 if __name__ == "__main__":
     TripMe().run()

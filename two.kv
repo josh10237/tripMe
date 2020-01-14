@@ -9,6 +9,30 @@
             size_hint_x: 2
             allow_stretch: True
 
+        Button:
+            id: discover
+            text: "Discover Destinations"
+            x: (root.width * .5)-150
+            y: root.height * 0.3
+            size: 300, 70
+            size_hint: None, None
+            color: 1, 1, 1, 1
+            bold: True
+            background_color: 3, 1, 1, 1
+            on_press: root.discover()
+
+        Button:
+            id: search
+            text: "Search Destinations"
+            x: (root.width * .5)-150
+            y: root.height * 0.5
+            size: 300, 70
+            size_hint: None, None
+            color: 1, 1, 1, 1
+            bold: True
+            background_color: 3, 1, 1, 1
+            on_press: root.search()
+
 
 
 
