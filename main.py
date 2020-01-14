@@ -98,10 +98,15 @@ class search(Screen):
             Builder.load_file('search.kv')
             super(search, self).__init__(**kwargs)
 
-    def apiCall(self):
+    def searchNow(self):
+        location = self.ids.location_search.text
+        self.apiCall(location)
+
+
+    def apiCall(self, location):
         url = "https://tripadvisor1.p.rapidapi.com/locations/search"
 
-        querystring = {"query": "pattaya", "lang": "en_US", "units": "mi"}
+        querystring = {"query": location, "lang": "en_US", "units": "mi"}
 
         headers = {
             'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",

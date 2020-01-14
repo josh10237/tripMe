@@ -9,13 +9,12 @@
             size_hint_x: 2
             allow_stretch: True
 
-
             TextInput:
                 id: location_search
                 multiline:False
-                width: 400
+                width: 325
                 height: 30
-                x: (root.width * .5) - 200
+                x: (root.width * .5) - 188
                 y: (root.height * 0.7)
                 background_color: 1, 1, 1, .3
                 hint_text_color: 1, 1, 1, .5
@@ -23,9 +22,9 @@
                 foreground_color: 1, 1, 1, 1
 
             Button:
-                id: discover
+                id: search_now
                 text: "Search"
-                x: (root.width * .5)
+                x: (root.width * .5)+138
                 y: root.height * 0.7
                 size: 50, 30
                 size_hint: None, None
