@@ -19,7 +19,6 @@ email = ""
 name = ""
 age = ""
 gender = ""
-len = 0
 windowcolor = (0, .6, .6, 1)
 personalData = ["name", "email", "age", "gender"]
 
@@ -69,13 +68,21 @@ class one(Screen):
     def checkInfo(self, name, email, age, gender):
         # if (name.find(" ") == -1):
         #     return "Name must have first and last seperated by space"
+        # if (name.isdigit == True):
+        #     return "Please enter a valid name"
+        # if (len(name) < 5):
+        #     return "Please enter a valid name"
         # if (email.find("@") == -1):
+        #     return "Please enter a valid email"
+        # if (email.find(".") == -1):
+        #     return "Please enter a valid email"
+        # if (email.find("com") == -1 and email.find("net") == -1):
         #     return "Please enter a valid email"
         # if (age.isdigit() == False):
         #     return "Please enter valid age"
         # if (len(age) != 2):
         #     return "Please enter a valid age"
-        # if (gender != "Male") and (gender != "Female"):
+        # if (gender != "Male") and (gender != "Female") and (gender != "male") and (gender != "female"):
         #     return "Please type Male or Female"
         # else:
         #     return "Pass"
@@ -106,12 +113,13 @@ class search(Screen):
         location = self.ids.location_search.text
         result = self.apiCall(location)
         tmpList = list()
-        counter = 0
         for entry in (result["data"]):
             tmpList.append(entry["result_object"]["location_string"])
-            counter += 1
 
-        fill = 10 - counter
+
+        tmpList = list(dict.fromkeys(tmpList))
+        count = len(tmpList)
+        fill = 10 - count
         for i in range(fill):
             tmpList.append("")
 
@@ -128,6 +136,8 @@ class search(Screen):
 
         if (fill == 10):
             self.ids.sResult1.text = "No Search Results"
+
+
 
     def apiCall(self, location):
         url = "https://tripadvisor1.p.rapidapi.com/locations/search"
