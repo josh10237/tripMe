@@ -112,9 +112,7 @@ class search(Screen):
             'x-rapidapi-host': "tripadvisor1.p.rapidapi.com",
             'x-rapidapi-key': "b8604d934emsh388e7aff14f4d7ep1eb9efjsn80019256d442"
         }
-
         response = requests.request("GET", url, headers=headers, params=querystring)
-
         print(response.text)
 
 
