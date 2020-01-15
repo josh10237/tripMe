@@ -8,6 +8,7 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.image import Image
 from kivy.core.window import Window
 from kivy.uix.slider import Slider
+from kivy.uix.image import AsyncImage
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 import os
@@ -15,13 +16,6 @@ from threading import Thread
 from time import sleep
 
 SCREEN_MANAGER = ScreenManager()
-email = ""
-name = ""
-age = ""
-gender = ""
-SRname = ""
-SRimg = ""
-SRdescription = ""
 windowcolor = (0, .6, .6, 1)
 personalData = ["name", "email", "age", "gender"]
 
@@ -182,13 +176,14 @@ class search(Screen):
         self.dispSearchResult(self.ids.sResult10.text)
 
     def dispSearchResult(self, locString):
-        global SRdescription
-        global SRimg
-        global SRname
         result = self.apiCall(locString)
         SRname = (result["data"][0]["result_object"]["location_string"])
         SRimg = (result["data"][0]["result_object"]["photo"]["images"]["large"]["url"])
         SRdescription = (result["data"][0]["result_object"]["geo_description"])
+        resultParams = list()
+        resultParams[0] = SRname
+        resultParams[1] = SRimg
+        resultParams[2] = SRdescription
         SCREEN_MANAGER.current = 'sresult'
 
 
