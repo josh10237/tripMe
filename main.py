@@ -4,7 +4,7 @@ import requests
 import utils
 import kivy.utils
 from kivy.app import App
-
+from kivy.uix.scrollview import ScrollView
 from kivy.uix.image import Image
 from kivy.core.window import Window
 from kivy.uix.slider import Slider
@@ -19,6 +19,7 @@ email = ""
 name = ""
 age = ""
 gender = ""
+windowcolor = (0, .6, .6, 1)
 personalData = ["name", "email", "age", "gender"]
 
 class TripMe(App):
@@ -27,7 +28,7 @@ class TripMe(App):
         return SCREEN_MANAGER
 
 
-Window.clearcolor = (0, .6, .6, 1)
+Window.clearcolor = windowcolor
 #main color: (3, 1, 1, 1)
 
 
