@@ -19,6 +19,9 @@ email = ""
 name = ""
 age = ""
 gender = ""
+SRname = ""
+SRimg = ""
+SRdescription = ""
 windowcolor = (0, .6, .6, 1)
 personalData = ["name", "email", "age", "gender"]
 
@@ -137,6 +140,58 @@ class search(Screen):
         if (fill == 10):
             self.ids.sResult1.text = "No Search Results"
 
+    def sR1(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult1.text)
+    def sR2(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult2.text)
+    def sR3(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult3.text)
+    def sR4(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult4.text)
+    def sR5(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult5.text)
+    def sR6(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult6.text)
+    def sR7(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult7.text)
+    def sR8(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult8.text)
+    def sR9(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult9.text)
+    def sR10(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult10.text)
+
+    def dispSearchResult(self, locString):
+        global SRdescription
+        global SRimg
+        global SRname
+        result = self.apiCall(locString)
+        SRname = (result["data"][0]["result_object"]["location_string"])
+        SRimg = (result["data"][0]["result_object"]["photo"]["images"]["large"]["url"])
+        SRdescription = (result["data"][0]["result_object"]["geo_description"])
+        SCREEN_MANAGER.current = 'sresult'
+
+
 
 
     def apiCall(self, location):
@@ -150,10 +205,14 @@ class search(Screen):
         }
         response = requests.get(url, headers=headers, params=querystring)
         result = response.json()
+        print (response.text)
         return result
 
 
-
+class sresult(Screen):
+    def __init__(self, **kwargs):
+        Builder.load_file('sresult.kv')
+        super(sresult, self).__init__(**kwargs)
 
 
 Builder.load_file('main.kv')
@@ -162,6 +221,9 @@ SCREEN_MANAGER.add_widget(one(name='one'))
 SCREEN_MANAGER.add_widget(why(name='why'))
 SCREEN_MANAGER.add_widget(two(name='two'))
 SCREEN_MANAGER.add_widget(search(name='search'))
+SCREEN_MANAGER.add_widget(sresult(name='sresult'))
+
+
 
 if __name__ == "__main__":
     TripMe().run()
