@@ -8,6 +8,7 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.image import Image
 from kivy.core.window import Window
 from kivy.uix.slider import Slider
+from kivy.uix.image import AsyncImage
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 import os
@@ -15,11 +16,6 @@ from threading import Thread
 from time import sleep
 
 SCREEN_MANAGER = ScreenManager()
-email = ""
-name = ""
-age = ""
-gender = ""
-len = 0
 windowcolor = (0, .6, .6, 1)
 personalData = ["name", "email", "age", "gender"]
 
@@ -69,13 +65,21 @@ class one(Screen):
     def checkInfo(self, name, email, age, gender):
         # if (name.find(" ") == -1):
         #     return "Name must have first and last seperated by space"
+        # if (name.isdigit == True):
+        #     return "Please enter a valid name"
+        # if (len(name) < 5):
+        #     return "Please enter a valid name"
         # if (email.find("@") == -1):
+        #     return "Please enter a valid email"
+        # if (email.find(".") == -1):
+        #     return "Please enter a valid email"
+        # if (email.find("com") == -1 and email.find("net") == -1):
         #     return "Please enter a valid email"
         # if (age.isdigit() == False):
         #     return "Please enter valid age"
         # if (len(age) != 2):
         #     return "Please enter a valid age"
-        # if (gender != "Male") and (gender != "Female"):
+        # if (gender != "Male") and (gender != "Female") and (gender != "male") and (gender != "female"):
         #     return "Please type Male or Female"
         # else:
         #     return "Pass"
@@ -106,12 +110,13 @@ class search(Screen):
         location = self.ids.location_search.text
         result = self.apiCall(location)
         tmpList = list()
-        counter = 0
         for entry in (result["data"]):
             tmpList.append(entry["result_object"]["location_string"])
-            counter += 1
 
-        fill = 10 - counter
+
+        tmpList = list(dict.fromkeys(tmpList))
+        count = len(tmpList)
+        fill = 10 - count
         for i in range(fill):
             tmpList.append("")
 
@@ -129,6 +134,61 @@ class search(Screen):
         if (fill == 10):
             self.ids.sResult1.text = "No Search Results"
 
+    def sR1(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult1.text)
+    def sR2(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult2.text)
+    def sR3(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult3.text)
+    def sR4(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult4.text)
+    def sR5(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult5.text)
+    def sR6(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult6.text)
+    def sR7(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult7.text)
+    def sR8(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult8.text)
+    def sR9(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult9.text)
+    def sR10(self):
+        if self.ids.sResult1.text == "":
+             return
+        self.dispSearchResult(self.ids.sResult10.text)
+
+    def dispSearchResult(self, locString):
+        result = self.apiCall(locString)
+        SRname = (result["data"][0]["result_object"]["location_string"])
+        SRimg = (result["data"][0]["result_object"]["photo"]["images"]["large"]["url"])
+        SRdescription = (result["data"][0]["result_object"]["geo_description"])
+        resultParams = list()
+        resultParams[0] = SRname
+        resultParams[1] = SRimg
+        resultParams[2] = SRdescription
+        SCREEN_MANAGER.current = 'sresult'
+
+
+
+
     def apiCall(self, location):
         url = "https://tripadvisor1.p.rapidapi.com/locations/search"
 
@@ -140,10 +200,14 @@ class search(Screen):
         }
         response = requests.get(url, headers=headers, params=querystring)
         result = response.json()
+        print (response.text)
         return result
 
 
-
+class sresult(Screen):
+    def __init__(self, **kwargs):
+        Builder.load_file('sresult.kv')
+        super(sresult, self).__init__(**kwargs)
 
 
 Builder.load_file('main.kv')
@@ -152,6 +216,9 @@ SCREEN_MANAGER.add_widget(one(name='one'))
 SCREEN_MANAGER.add_widget(why(name='why'))
 SCREEN_MANAGER.add_widget(two(name='two'))
 SCREEN_MANAGER.add_widget(search(name='search'))
+SCREEN_MANAGER.add_widget(sresult(name='sresult'))
+
+
 
 if __name__ == "__main__":
     TripMe().run()
