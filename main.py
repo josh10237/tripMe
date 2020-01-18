@@ -181,9 +181,10 @@ class search(Screen):
         SRimg = (result["data"][0]["result_object"]["photo"]["images"]["large"]["url"])
         SRdescription = (result["data"][0]["result_object"]["geo_description"])
         resultParams = list()
-        resultParams[0] = SRname
-        resultParams[1] = SRimg
-        resultParams[2] = SRdescription
+        resultParams.append(SRname)
+        resultParams.append(SRimg)
+        resultParams.append(SRdescription)
+        SCREEN_MANAGER.get_screen('sresult').ids.asynchimage.source = SRimg
         SCREEN_MANAGER.current = 'sresult'
 
 
@@ -200,7 +201,6 @@ class search(Screen):
         }
         response = requests.get(url, headers=headers, params=querystring)
         result = response.json()
-        print (response.text)
         return result
 
 
