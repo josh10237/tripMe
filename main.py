@@ -58,7 +58,7 @@ class one(Screen):
             personalData[2] = age
             personalData[3] = gender
             print(personalData)
-            SCREEN_MANAGER.current = 'two'
+            SCREEN_MANAGER.current = 'search'
         else:
             self.ids.info_error.text = check
 
@@ -91,11 +91,6 @@ class why(Screen):
         Builder.load_file('why.kv')
         super(why, self).__init__(**kwargs)
 
-
-class two(Screen):
-    def __init__(self, **kwargs):
-        Builder.load_file('two.kv')
-        super(two, self).__init__(**kwargs)
 
     def search(self):
         SCREEN_MANAGER.current = 'search'
@@ -184,8 +179,8 @@ class search(Screen):
         resultParams.append(SRname)
         resultParams.append(SRimg)
         resultParams.append(SRdescription)
-        SCREEN_MANAGER.get_screen('sresult').ids.asynchimage.source = SRimg
         SCREEN_MANAGER.current = 'sresult'
+        SCREEN_MANAGER.get_screen('sresult').ids.asynchimage.source = SRimg
 
 
 
@@ -214,7 +209,6 @@ Builder.load_file('main.kv')
 SCREEN_MANAGER.add_widget(MainScreen(name='main'))
 SCREEN_MANAGER.add_widget(one(name='one'))
 SCREEN_MANAGER.add_widget(why(name='why'))
-SCREEN_MANAGER.add_widget(two(name='two'))
 SCREEN_MANAGER.add_widget(search(name='search'))
 SCREEN_MANAGER.add_widget(sresult(name='sresult'))
 
